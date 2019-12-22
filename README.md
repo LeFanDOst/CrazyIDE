@@ -21,3 +21,6 @@ Développement en C++ d'un IDE C++ portable.
 	make.bat					# Script MS-DOS permettant de lancer le Makefile sous Windows.
 	Makefile					# Makefile permettant l'automatisation de la compilation du programme de l'IDE. Il est capable de marcher sous Linux et sous Windows, moyennant une modification selon l'OS.
 	README.md					# Ce fichier.
+
+### Librairies utilisées lors du développement de CrazyIDE :
+* TinyXML : Un parser XML simple, lien : http://www.grinninglizard.com/tinyxml/
