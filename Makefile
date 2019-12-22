@@ -1,18 +1,19 @@
-Linux=no
-Debug=yes
+export Linux=no
+export Debug=yes
 
-Compilo=g++
+DirSrc=src
+DirObj=obj
+DirLibTinyXML=lib/TinyXML
+
+export Compilo=g++
 ifeq ($(Debug),yes)
 	Preproc=-c -g -Wall -Wextra -Werror -Wfatal-errors -O3 -fexceptions -std=c++11
 else
 	Preproc=-c -Wall -Wextra -Werror -Wfatal-errors -O3 -fexceptions -std=c++11
 endif
-Liens=-o
-Drapeaux=
-DrapeauxLiens=$(Drapeaux) -L../lib -lSSQLite
-
-DirSrc=src
-DirObj=obj
+export Liens=-o
+DrapeauxPreproc=
+DrapeauxLiens=$(DrapeauxPreproc) -L$(DirLibTinyXML)/lib -lTinyXML
 
 ifeq ($(Linux),yes)
 	RM=rm -f
@@ -39,12 +40,13 @@ endif
 all: $(Exec)
 
 $(Exec): $(Obj)
+	@(cd $(DirLibTinyXML) && $(MAKE))
 	$(Compilo) $(Liens) $@ $^ $(DrapeauxLiens)
 
 $(DirObj)/main.o: include/Inclusions.hpp
 
 $(DirObj)/%.o: $(DirSrc)/%.cpp
-	$(Compilo) $(Liens) $@ $< $(Preproc) $(Drapeaux)
+	$(Compilo) $(Liens) $@ $< $(Preproc) $(DrapeauxPreproc)
 
 .PHONY: clean mrproper run
 
