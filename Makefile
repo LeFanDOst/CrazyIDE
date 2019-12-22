@@ -51,9 +51,11 @@ $(DirObj)/%.o: $(DirSrc)/%.cpp
 .PHONY: clean mrproper run
 
 clean:
+	@(cd $(DirLibTinyXML) && $(MAKE) $@)
 	$(cmdClean)
 
 mrproper:
+	@(cd $(DirLibTinyXML) && $(MAKE) $@)
 	$(RM) $(Exec)
 
 run:
